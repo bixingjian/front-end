@@ -4,13 +4,33 @@ import "./index.css";
 
 class Square extends React.Component {
   render() {
-    return <button className="square">{/* TODO */}</button>;
+    return (
+      <button className="square" onClick={() => this.props.onClick()}>
+        {this.props.value}
+      </button>
+    ); //要使用{} 不然现实的是字符串
   }
 }
 
 class Board extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { squares: Array(9).fill(null) };
+  }
+
+  handleClick(i) {
+    const squares = this.state.squares.slice(); //slice 相当于取下标 生成一个新的数组 如果没有参数就相当于复制一个新的数组 这就是不可变性很重要
+    squares[i] = "X";
+    this.setState({ squares: squares });
+  }
+
   renderSquare(i) {
-    return <Square />;
+    return (
+      <Square
+        value={this.state.squares[i]}
+        onClick={() => this.handleClick(i)}
+      />
+    );
   }
 
   render() {
