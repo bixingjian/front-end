@@ -80,7 +80,8 @@ class Game extends React.Component {
     const current = history[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
 
-    const moves = history.map((step, move) => {
+    const moves = history.map((item, move) => {
+      //map 函数的参数(item, step, arr)
       const description = move ? "Go to move #" + move : "Go to game start";
       return (
         <li key={move}>
